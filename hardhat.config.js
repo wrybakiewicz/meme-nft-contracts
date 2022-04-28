@@ -32,6 +32,11 @@ module.exports = {
       chainId: 288,
       accounts: [process.env.BOBA_PRIVATE_KEY]
     },
+    mumbai: {
+      url: "https://matic-mumbai.chainstacklabs.com/",
+      chainId: 80001,
+      accounts: [process.env.MUMBAI_PRIVATE_KEY]
+    }
   },
   settings: {
     optimizer: {

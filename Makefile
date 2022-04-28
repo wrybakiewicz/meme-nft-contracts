@@ -12,6 +12,9 @@ node:
 deploy_local:
 	npx hardhat deploy --network localhost --export ./deploy.json
 
+deploy_matic_testnet:
+	npx hardhat deploy --network mumbai --export ./deploy.json
+
 install:
 	npm install
 
