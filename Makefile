@@ -19,7 +19,7 @@ install:
 	npm install
 
 deploy_matic:
-	npx hardhat deploy --network matic
+	npx hardhat deploy --network matic --export ./deploy.json
 
 deploy_boba:
 	npx hardhat deploy --network boba
