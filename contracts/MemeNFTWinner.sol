@@ -8,23 +8,19 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Royalty.sol";
 
-//TODO: test
-//TODO: deployment script
 contract MemeNFTWinner is ERC721Enumerable, ERC721URIStorage, ERC721Royalty, Ownable {
 
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
-    address public memeNFTFrom;
 
-    constructor(address _memeNFTFrom) ERC721("MemeNFTWinner", "MNFTW") {
-        memeNFTFrom = _memeNFTFrom;
+    constructor() ERC721("MemeNFTWinner", "MNFTW") {
         _setDefaultRoyalty(msg.sender, 500);
     }
 
-    function mint(string memory _tokenURI) public onlyOwner returns (uint) {
+    function mint(string memory _tokenURI, address to) public onlyOwner returns (uint) {
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
-        _mint(msg.sender, newItemId);
+        _mint(to, newItemId);
         _setTokenURI(newItemId, _tokenURI);
         return newItemId;
     }
