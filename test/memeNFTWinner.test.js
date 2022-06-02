@@ -87,6 +87,24 @@ describe("MemeNFTWinner", function () {
         await expect(mintTx2).to.emit(memeNFTWinner, "MintedFromOpen")
             .withArgs(2, 2);
     });
+
+    it("should not mint not whitelisted token", async () => {
+        const [owner, address1, address2] = await ethers.getSigners();
+        const memeNftOpen = await deployMemeNftOpen()
+        const memeNFTWinner = await deployMemeNftWinner(memeNftOpen.address)
+
+        const tokenUri1 = "uri1"
+        const tokenUri2 = "uri2"
+        await memeNftOpen.connect(address1).mint(tokenUri1)
+        await memeNftOpen.connect(address2).mint(tokenUri2)
+        await memeNftOpen.connect(address1).approve(memeNFTWinner.address, 1)
+        await memeNftOpen.connect(address2).approve(memeNFTWinner.address, 2)
+        await memeNFTWinner.addOpenCollectionWinnerIds([2])
+
+        const mintTx1 = memeNFTWinner.connect(address1).mintFromOpenCollection(1)
+
+        await expect(mintTx1).to.be.revertedWith("Can mint only whitelisted tokens")
+    });
     
     const deployMemeNftOpen = async () => {
         const MemeNFTOpen = await ethers.getContractFactory("MemeNFTOpen");
