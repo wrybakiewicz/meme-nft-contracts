@@ -17,12 +17,12 @@ contract MemeNFTWinner is ERC721Enumerable, ERC721URIStorage, ERC721Royalty, IER
     mapping(uint => bool) public openCollectionTokenIdCanMint;
     address public openCollectionAddress;
 
+    event MintedFromOpen(uint openTokenId, uint newTokenId);
+
     constructor(address _openCollectionAddress) ERC721("MemeNFTWinner", "MNFTW") {
         _setDefaultRoyalty(msg.sender, 500);
         openCollectionAddress = _openCollectionAddress;
     }
-
-    //TODO: add tests for this & some events
 
     function addOpenCollectionWinnerIds(uint[] memory _openCollectionWinnerIds) public onlyOwner {
         for (uint i = 0; i < _openCollectionWinnerIds.length; i++) {
@@ -35,17 +35,16 @@ contract MemeNFTWinner is ERC721Enumerable, ERC721URIStorage, ERC721Royalty, IER
         ERC721URIStorage openCollection = ERC721URIStorage(openCollectionAddress);
         string memory _tokenURI = openCollection.tokenURI(_openCollectionTokenId);
         openCollection.safeTransferFrom(msg.sender, address(this), _openCollectionTokenId);
-        mint(_tokenURI, msg.sender);
+        uint newTokenId = mint(_tokenURI, msg.sender);
+        emit MintedFromOpen(_openCollectionTokenId, newTokenId);
     }
 
     function onERC721Received(
         address,
-        address from,
-        uint256 tokenId,
+        address,
+        uint256,
         bytes calldata
-    ) external view returns (bytes4) {
-        require(from == openCollectionAddress, "Can receive tokens only from open collection address");
-        require(openCollectionTokenIdCanMint[tokenId], "Token id must be whitelisted");
+    ) external pure returns (bytes4) {
         return MemeNFTWinner.onERC721Received.selector;
     }
 
