@@ -1,6 +1,6 @@
 const {network} = require("hardhat")
 
-const openNftAddress = "0x37016d5175817F4a17A0eE27Fd6B448AEE4c55A9"
+const openNftAddress = "0x89D10D5Fe01B544A8bcaBF5F9124E1DD2788240B"
 
 module.exports = async ({getNamedAccounts, deployments}) => {
     const {deploy, log} = deployments

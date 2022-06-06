@@ -10,8 +10,10 @@ describe("MemeNFTWinner", function () {
 
         const tokenUri1 = "uri1"
         const tokenUri2 = "uri2"
-        await memeNftOpen.connect(address1).mint(tokenUri1)
-        await memeNftOpen.connect(address2).mint(tokenUri2)
+        await memeNftOpen.mint(address1.address)
+        await memeNftOpen.setTokenURI(tokenUri1, 1)
+        await memeNftOpen.mint(address2.address)
+        await memeNftOpen.setTokenURI(tokenUri2, 2)
         await memeNftOpen.connect(address2).approve(memeNFTWinner.address, 2)
         await memeNFTWinner.addOpenCollectionWinnerIds([2])
 
@@ -34,9 +36,12 @@ describe("MemeNFTWinner", function () {
         const tokenUri1 = "uri1"
         const tokenUri2 = "uri2"
         const tokenUri3 = "uri3"
-        await memeNftOpen.connect(address1).mint(tokenUri1)
-        await memeNftOpen.connect(address2).mint(tokenUri2)
-        await memeNftOpen.connect(address3).mint(tokenUri3)
+        await memeNftOpen.mint(address1.address)
+        await memeNftOpen.setTokenURI(tokenUri1, 1)
+        await memeNftOpen.mint(address2.address)
+        await memeNftOpen.setTokenURI(tokenUri2, 2)
+        await memeNftOpen.mint(address3.address)
+        await memeNftOpen.setTokenURI(tokenUri3, 3)
         await memeNftOpen.connect(address1).approve(memeNFTWinner.address, 1)
         await memeNftOpen.connect(address3).approve(memeNFTWinner.address, 3)
         await memeNFTWinner.addOpenCollectionWinnerIds([1, 3])
@@ -65,9 +70,12 @@ describe("MemeNFTWinner", function () {
         const tokenUri1 = "uri1"
         const tokenUri2 = "uri2"
         const tokenUri3 = "uri3"
-        await memeNftOpen.connect(address1).mint(tokenUri1)
-        await memeNftOpen.connect(address1).mint(tokenUri2)
-        await memeNftOpen.connect(address3).mint(tokenUri3)
+        await memeNftOpen.mint(address1.address)
+        await memeNftOpen.setTokenURI(tokenUri1, 1)
+        await memeNftOpen.mint(address1.address)
+        await memeNftOpen.setTokenURI(tokenUri2, 2)
+        await memeNftOpen.mint(address3.address)
+        await memeNftOpen.setTokenURI(tokenUri3, 3)
         await memeNftOpen.connect(address1).approve(memeNFTWinner.address, 1)
         await memeNftOpen.connect(address1).approve(memeNFTWinner.address, 2)
         await memeNFTWinner.addOpenCollectionWinnerIds([1, 2])
@@ -95,8 +103,10 @@ describe("MemeNFTWinner", function () {
 
         const tokenUri1 = "uri1"
         const tokenUri2 = "uri2"
-        await memeNftOpen.connect(address1).mint(tokenUri1)
-        await memeNftOpen.connect(address2).mint(tokenUri2)
+        await memeNftOpen.mint(address1.address)
+        await memeNftOpen.setTokenURI(tokenUri1, 1)
+        await memeNftOpen.mint(address2.address)
+        await memeNftOpen.setTokenURI(tokenUri2, 2)
         await memeNftOpen.connect(address1).approve(memeNFTWinner.address, 1)
         await memeNftOpen.connect(address2).approve(memeNFTWinner.address, 2)
         await memeNFTWinner.addOpenCollectionWinnerIds([2])

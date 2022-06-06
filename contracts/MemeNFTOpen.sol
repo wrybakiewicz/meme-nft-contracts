@@ -5,20 +5,24 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract MemeNFTOpen is ERC721Enumerable, ERC721URIStorage {
+contract MemeNFTOpen is ERC721Enumerable, ERC721URIStorage, Ownable {
 
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
     constructor() ERC721("MemeNFTOpen", "MNFTO") {}
 
-    function mint(string memory _tokenURI) public returns (uint) {
+    function mint(address _receiver) public onlyOwner returns (uint) {
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
-        _mint(msg.sender, newItemId);
-        _setTokenURI(newItemId, _tokenURI);
+        _mint(_receiver, newItemId);
         return newItemId;
+    }
+
+    function setTokenURI(string memory _tokenURI, uint _tokenId) public onlyOwner {
+        _setTokenURI(_tokenId, _tokenURI);
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 tokenId)

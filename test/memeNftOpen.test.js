@@ -11,9 +11,12 @@ describe("MemeNFTOpen", function () {
     const url2 = "some2.url"
     const url3 = "some3.url"
 
-    const mintTx1 = await memeNFTOpen.mint(url1)
-    await memeNFTOpen.mint(url2)
-    await memeNFTOpen.connect(address1).mint(url3)
+    const mintTx1 = await memeNFTOpen.mint(owner.address)
+    await memeNFTOpen.setTokenURI(url1, 1)
+    await memeNFTOpen.mint(owner.address)
+    await memeNFTOpen.setTokenURI(url2, 2)
+    await memeNFTOpen.mint(address1.address)
+    await memeNFTOpen.setTokenURI(url3, 3)
 
     expect(await memeNFTOpen.name()).to.equal("MemeNFTOpen");
     expect(await memeNFTOpen.symbol()).to.equal("MNFTO");
