@@ -10,7 +10,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Royalty.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 
 
-contract MemeNFTWinner is ERC721Enumerable, ERC721URIStorage, ERC721Royalty, IERC721Receiver, Ownable {
+contract MemeDegensWinners is ERC721Enumerable, ERC721URIStorage, ERC721Royalty, IERC721Receiver, Ownable {
 
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
@@ -19,7 +19,7 @@ contract MemeNFTWinner is ERC721Enumerable, ERC721URIStorage, ERC721Royalty, IER
 
     event MintedFromOpen(uint openTokenId, uint newTokenId);
 
-    constructor(address _openCollectionAddress) ERC721("MemeNFTWinner", "MNFTW") {
+    constructor(address _openCollectionAddress) ERC721("MemeDegensWinners", "MDGW") {
         _setDefaultRoyalty(msg.sender, 500);
         openCollectionAddress = _openCollectionAddress;
     }
@@ -45,7 +45,7 @@ contract MemeNFTWinner is ERC721Enumerable, ERC721URIStorage, ERC721Royalty, IER
         uint256,
         bytes calldata
     ) external pure returns (bytes4) {
-        return MemeNFTWinner.onERC721Received.selector;
+        return MemeDegensWinners.onERC721Received.selector;
     }
 
     function mint(string memory _tokenURI, address to) internal returns (uint) {

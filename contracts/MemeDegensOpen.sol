@@ -7,12 +7,12 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract MemeNFTOpen is ERC721Enumerable, ERC721URIStorage, Ownable {
+contract MemeDegensOpen is ERC721Enumerable, ERC721URIStorage, Ownable {
 
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    constructor() ERC721("MemeNFTOpen", "MNFTO") {}
+    constructor() ERC721("MemeDegensOpen", "MDGO") {}
 
     function mint(address _receiver) public onlyOwner returns (uint) {
         _tokenIds.increment();
